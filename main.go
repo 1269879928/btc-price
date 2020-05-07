@@ -2,35 +2,21 @@ package main
 
 import (
 	"fmt"
-	"github.com/huobirdcenter/huobi_golang/config"
-	"github.com/huobirdcenter/huobi_golang/pkg/client"
-	"price/trades"
+	"price/lastSymbol"
 )
 
 func main()  {
-	trades.TestOKExServerTime()
-	huobi()
-}
+	// okex
+	//res, err := new(lastSymbol.LastOkexPrice).Init("BTC-USDT").GetLastSymbolByOne()
+	//fmt.Println(res, err)
+	// 火币
+	//res, err := new(lastSymbol.LastHuoBiPrice).Init("btcusdt").GetLastSymbolByOne()
+	//fmt.Println(res, err)
+	// Binance
+	//res, err := new(lastSymbol.LastBinancePrice).Init("BTCUSDT").GetLastSymbolByOne()
+	//fmt.Println(res, err)
+	// zb
+	res, err := new(lastSymbol.LastZbPrice).Init("btc_usdt").GetLastSymbolByOne()
+	fmt.Println(res, err)
 
-func huobi()  {
-	client := new(client.CommonClient).Init(config.Host)
-	resp, err := client.GetTimestamp()
-
-	if err != nil {
-		fmt.Println(err)
-	} else {
-		fmt.Println("timestamp:", resp)
-	}
-
-
-	// Get the list of accounts owned by this API user and print the detail on console
-	//client := new(client.AccountClient).Init(config.AccessKey, config.SecretKey, config.Host)
-	//resp, err := client.GetAccountInfo()
-	//if err != nil {
-	//	fmt.Println(err)
-	//} else {
-	//	for _, result := range resp {
-	//		fmt.Printf("account: %+v\n", result)
-	//	}
-	//}
 }
